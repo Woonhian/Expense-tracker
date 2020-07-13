@@ -1,14 +1,27 @@
 import React from "react";
+import { useContext } from "react";
+import { ExpenseContext } from "../contexts/expenseContext";
 
-const Entry = () => {
+const Entry = (props) => {
+  const { handleDelete } = useContext(ExpenseContext);
   return (
     <div>
-      <li className="entry-item mt-2 list-group-item list-group-item-action list-group-item-success">
-        Pizza purchase
-        <button className="close-button close">
+      <li
+        className={`entry-item mt-2 list-group-item list-group-item-action list-group-item-${
+          props.entry.amount > 0 ? "success" : "danger"
+        }`}
+      >
+        {props.entry.description}
+        <button
+          onClick={() => handleDelete(props.entry.id)}
+          className="close-button close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
-        <span className="float-right">+$250</span>
+        <span className="float-right">
+          {props.entry.amount > 0 ? "+$" : "-$"}
+          {Math.abs(props.entry.amount)}
+        </span>
       </li>
     </div>
   );

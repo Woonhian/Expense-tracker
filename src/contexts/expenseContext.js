@@ -11,8 +11,12 @@ export const ExpenseContextProvider = (props) => {
     { id: 5, description: "Drinks", amount: 50 },
   ]);
 
+  const handleDelete = (id) => {
+    setEntries(entries.filter((entry) => entry.id !== id));
+  };
+
   return (
-    <ExpenseContext.Provider value={{ entries }}>
+    <ExpenseContext.Provider value={{ entries, handleDelete }}>
       {props.children}
     </ExpenseContext.Provider>
   );
