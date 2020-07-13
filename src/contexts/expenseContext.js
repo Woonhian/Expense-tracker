@@ -15,8 +15,12 @@ export const ExpenseContextProvider = (props) => {
     setEntries(entries.filter((entry) => entry.id !== id));
   };
 
+  const addEntry = (newEntry) => {
+    setEntries([...entries, newEntry]);
+  };
+
   return (
-    <ExpenseContext.Provider value={{ entries, handleDelete }}>
+    <ExpenseContext.Provider value={{ entries, handleDelete, addEntry }}>
       {props.children}
     </ExpenseContext.Provider>
   );
